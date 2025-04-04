@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Position and Size Demo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .demo-section {
+      background-color: #f5f5f5;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+      position: relative;
+      height: 200px;
+      border: 1px solid #ddd;
+    }
+    
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      color: #3498db;
+      margin-top: 30px;
+    }
+    
+    code {
+      background-color: #f8f8f8;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      color: #e74c3c;
+    }
+    
+    /* Button Sizing Examples */
+    .default-button {
+      /* Default styling */
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .small-button {
+      width: 80px;
+      height: 30px;
+      font-size: 12px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .medium-button {
+      width: 150px;
+      height: 40px;
+      font-size: 16px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .large-button {
+      width: 220px;
+      height: 60px;
+      font-size: 20px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .padding-button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    /* Button Positioning Examples */
+    .top-left {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+    
+    .top-right {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    
+    .bottom-left {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+    
+    .bottom-right {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+    }
+    
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    /* Flexbox Example */
+    .flex-container {
+      display: flex;
+      height: 100%;
+    }
+    
+    .flex-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+    
+    .space-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    
+    .space-around {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Button Position and Size Demo</h1>
+    
+    <h2>Button Sizes</h2>
+    <div class="demo-section">
+      <button class="small-button">Small</button>
+      <button class="medium-button">Medium</button>
+      <button class="large-button">Large</button>
+      <button class="padding-button">Padding Sized</button>
+    </div>
+    
+    <h2>Absolute Positioning</h2>
+    <div class="demo-section">
+      <button class="default-button top-left">Top Left</button>
+      <button class="default-button top-right">Top Right</button>
+      <button class="default-button bottom-left">Bottom Left</button>
+      <button class="default-button bottom-right">Bottom Right</button>
+      <button class="default-button center">Center</button>
+    </div>
+    
+    <h2>Flexbox Centering</h2>
+    <div class="demo-section">
+      <div class="flex-center">
+        <button class="default-button">Centered with Flexbox</button>
+      </div>
+    </div>
+    
+    <h2>Flexbox Distribution</h2>
+    <div class="demo-section">
+      <div class="space-between">
+        <button class="default-button">Left</button>
+        <button class="default-button">Middle</button>
+        <button class="default-button">Right</button>
+      </div>
+    </div>
+    
+    <h2>Flexbox Space Around</h2>
+    <div class="demo-section">
+      <div class="space-around">
+        <button class="default-button">Button 1</button>
+        <button class="default-button">Button 2</button>
+        <button class="default-button">Button 3</button>
+      </div>
+    </div>
+    
+    <h2>CSS Code Examples</h2>
+    <p>To set specific button sizes:</p>
+    <pre><code>/* Size using width and height */
+.button {
+  width: 150px;
+  height: 40px;
+  font-size: 16px;
+}
+
+/* Size using padding */
+.button {
+  padding: 12px 24px;
+  font-size: 16px;
+}</code></pre>
+    
+    <p>To position a button:</p>
+    <pre><code>/* Center a button absolutely */
+.center-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Position in corners */
+.top-right {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* Using flexbox to center */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}</code></pre>
+  </div>
+</body>
+</html>

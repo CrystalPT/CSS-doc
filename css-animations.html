@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation Examples</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+    
+    h2 {
+      color: #3498db;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+      margin-top: 30px;
+    }
+    
+    .demo-area {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px 0;
+      gap: 20px;
+    }
+    
+    .demo-box {
+      width: 100px;
+      height: 100px;
+      background-color: #3498db;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    
+    .demo-block {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: #3498db;
+    }
+    
+    pre {
+      background-color: #f8f8f8;
+      border-left: 4px solid #3498db;
+      padding: 15px;
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+    }
+    
+    /* Animation 1: Fade In */
+    .fade-in {
+      animation: fadeIn 2s;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Animation 2: Slide In from Left */
+    .slide-in-left {
+      animation: slideInLeft 1s ease-out;
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Animation 3: Pulse Effect */
+    .pulse {
+      animation: pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    /* Animation 4: Bounce */
+    .bounce {
+      animation: bounce 1s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    /* Animation 5: Rotation */
+    .rotate {
+      animation: rotate 3s linear infinite;
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Animation 6: Color Change */
+    .color-change {
+      animation: colorChange 3s infinite;
+    }
+    
+    @keyframes colorChange {
+      0% { background-color: #3498db; }
+      33% { background-color: #e74c3c; }
+      66% { background-color: #2ecc71; }
+      100% { background-color: #3498db; }
+    }
+    
+    /* Animation 7: Shake */
+    .shake {
+      animation: shake 0.5s infinite;
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+    
+    /* Animation 8: Flip */
+    .flip {
+      animation: flip 2s infinite;
+      transform-style: preserve-3d;
+    }
+    
+    @keyframes flip {
+      0% { transform: perspective(400px) rotateY(0); }
+      100% { transform: perspective(400px) rotateY(360deg); }
+    }
+
+    .reset-btn {
+      background-color: #e74c3c;
+      margin-top: 10px;
+    }
+    
+    .reset-btn:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CSS Animation Examples</h1>
+    
+    <h2>1. Fade In</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="fadeBox" class="demo-box">Fade</div>
+        <button onclick="document.getElementById('fadeBox').className = 'demo-box fade-in'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('fadeBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.fade-in {
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}</pre>
+    
+    <h2>2. Slide In from Left</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="slideBox" class="demo-box">Slide</div>
+        <button onclick="document.getElementById('slideBox').className = 'demo-box slide-in-left'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('slideBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.slide-in-left {
+  animation: slideInLeft 1s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}</pre>
+    
+    <h2>3. Pulse Effect</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="pulseBox" class="demo-box">Pulse</div>
+        <button onclick="document.getElementById('pulseBox').className = 'demo-box pulse'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('pulseBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}</pre>
+    
+    <h2>4. Bounce</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="bounceBox" class="demo-box">Bounce</div>
+        <button onclick="document.getElementById('bounceBox').className = 'demo-box bounce'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('bounceBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.bounce {
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}</pre>
+    
+    <h2>5. Rotation</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="rotateBox" class="demo-box">Rotate</div>
+        <button onclick="document.getElementById('rotateBox').className = 'demo-box rotate'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('rotateBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.rotate {
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}</pre>
+    
+    <h2>6. Color Change</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="colorBox" class="demo-box">Colors</div>
+        <button onclick="document.getElementById('colorBox').className = 'demo-box color-change'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('colorBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.color-change {
+  animation: colorChange 3s infinite;
+}
+
+@keyframes colorChange {
+  0% { background-color: #3498db; }
+  33% { background-color: #e74c3c; }
+  66% { background-color: #2ecc71; }
+  100% { background-color: #3498db; }
+}</pre>
+    
+    <h2>7. Shake</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="shakeBox" class="demo-box">Shake</div>
+        <button onclick="document.getElementById('shakeBox').className = 'demo-box shake'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('shakeBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.shake {
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}</pre>
+    
+    <h2>8. Flip</h2>
+    <div class="demo-area">
+      <div class="demo-block">
+        <div id="flipBox" class="demo-box">Flip</div>
+        <button onclick="document.getElementById('flipBox').className = 'demo-box flip'">Play</button>
+        <button class="reset-btn" onclick="document.getElementById('flipBox').className = 'demo-box'">Reset</button>
+      </div>
+    </div>
+    <pre>
+.flip {
+  animation: flip 2s infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes flip {
+  0% { transform: perspective(400px) rotateY(0); }
+  100% { transform: perspective(400px) rotateY(360deg); }
+}</pre>
+
+    <h2>Animation Properties Explained</h2>
+    <pre>
+/* Basic Animation Syntax */
+.element {
+  animation: name duration timing-function delay iteration-count direction fill-mode;
+}
+
+/* Example */
+.element {
+  animation: bounce 1s ease-in-out 0.5s infinite alternate forwards;
+}
+
+/* Properties Explained */
+- name: The name of the @keyframes animation
+- duration: How long the animation takes (e.g., 1s, 300ms)
+- timing-function: How the animation progresses (e.g., ease, linear, ease-in, ease-out)
+- delay: Time before the animation starts (e.g., 0.5s)
+- iteration-count: How many times to run (e.g., 3, infinite)
+- direction: Animation direction (normal, reverse, alternate, alternate-reverse)
+- fill-mode: What styles apply before/after (none, forwards, backwards, both)</pre>
+  </div>
+</body>
+</html>

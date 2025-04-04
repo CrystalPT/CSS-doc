@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Documentary - Comprehensive CSS Guide</title>
+  <style>
+    /* Base Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f7fa;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    
+    .subtitle {
+      color: #7f8c8d;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+    
+    .author {
+      font-style: italic;
+      color: #3498db;
+      margin-bottom: 30px;
+    }
+
+    .intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+    
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+    }
+    
+    .card-header {
+      color: white;
+      padding: 15px 20px;
+    }
+    
+    .difficulty-easy {
+      background-color: #2ecc71; /* Green */
+    }
+    
+    .difficulty-medium {
+      background-color: #f39c12; /* Orange */
+    }
+    
+    .difficulty-hard {
+      background-color: #e74c3c; /* Red */
+    }
+    
+    .card-title {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .card-description {
+      color: #555;
+      margin-bottom: 20px;
+    }
+    
+    .card-link {
+      display: inline-block;
+      background-color: #3498db; /* Blue color for all buttons */
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    
+    .card-link:hover {
+      background-color: #2980b9; /* Darker blue on hover */
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      color: #7f8c8d;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>CSS Documentary</h1>
+      <p class="subtitle">A Comprehensive Guide to Modern CSS</p>
+      <p class="author">Made by Ori Surut</p>
+    </header>
+    
+    <div class="intro">
+      <p>Welcome to this comprehensive CSS documentary. This collection of guides covers various aspects of CSS, from basic properties to advanced techniques. Each section focuses on a specific area of CSS, providing examples, explanations, and best practices.</p>
+      
+      <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+        <div style="display: flex; align-items: center;">
+          <span style="display: inline-block; width: 20px; height: 20px; background-color: #2ecc71; margin-right: 8px; border-radius: 3px;"></span>
+          <span>Easy</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <span style="display: inline-block; width: 20px; height: 20px; background-color: #f39c12; margin-right: 8px; border-radius: 3px;"></span>
+          <span>Medium</span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <span style="display: inline-block; width: 20px; height: 20px; background-color: #e74c3c; margin-right: 8px; border-radius: 3px;"></span>
+          <span>Hard</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-grid">
+      <!-- Easiest to hardest, top to bottom -->
+      <div class="card">
+        <div class="card-header difficulty-easy">
+          <h2 class="card-title">CSS Colors & Gradients</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Master color formats, gradients, color theory, and create visually appealing color schemes.</p>
+          <a href="css-colors.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-easy">
+          <h2 class="card-title">CSS Backgrounds</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Learn to use background colors, images, gradients, and techniques for creating beautiful backgrounds.</p>
+          <a href="css-backgrounds.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-easy">
+          <h2 class="card-title">Typography</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Master text styling with font properties, layout techniques, and typography best practices.</p>
+          <a href="css-typography.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-easy">
+          <h2 class="card-title">Button Styling</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Learn to position and size buttons effectively with techniques like absolute positioning and flexbox.</p>
+          <a href="button-styling.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-easy">
+          <h2 class="card-title">Button Borders</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Discover various techniques for styling button borders with different styles, sizes, and effects.</p>
+          <a href="button-borders.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-medium">
+          <h2 class="card-title">CSS Variables</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Learn how to use CSS custom properties (variables) to create more maintainable and dynamic stylesheets.</p>
+          <a href="css-variables.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-medium">
+          <h2 class="card-title">CSS Animations</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Explore basic CSS animations with examples of effects like fade, bounce, rotate, and color changes.</p>
+          <a href="css-animations.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-medium">
+          <h2 class="card-title">CSS Transforms & Effects</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Learn 2D/3D transforms, filters, blend modes, and other visual effects to enhance your designs.</p>
+          <a href="css-transforms.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-medium">
+          <h2 class="card-title">Advanced Animations</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Dive deeper into animations and transitions with comprehensive examples and techniques.</p>
+          <a href="css-animations2.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-hard">
+          <h2 class="card-title">Flexbox Layout</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Learn the flexible box layout model for designing complex layout structures with ease.</p>
+          <a href="css-flexbox.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-hard">
+          <h2 class="card-title">Grid Layout</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Explore CSS Grid for powerful two-dimensional layouts with rows and columns.</p>
+          <a href="css-grid.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header difficulty-hard">
+          <h2 class="card-title">Responsive Design</h2>
+        </div>
+        <div class="card-body">
+          <p class="card-description">Create websites that look great on any device with fluid layouts, media queries, and more.</p>
+          <a href="css-responsive.html" class="card-link">Explore Guide</a>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>&copy; 2025 CSS Documentary by Ori Surut. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>

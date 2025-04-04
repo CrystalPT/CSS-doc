@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Variables and Custom Properties Guide</title>
+  <style>
+    /* Base Styles */
+    :root {
+      --main-color: #3498db;
+      --accent-color: #e74c3c;
+      --text-color: #2c3e50;
+      --background-color: #f5f7fa;
+      --secondary-background: white;
+      --border-radius: 8px;
+      --box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      --spacing-sm: 10px;
+      --spacing-md: 20px;
+      --spacing-lg: 30px;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --font-size-base: 16px;
+      --font-size-heading: 1.5rem;
+      --transition-default: all 0.3s ease;
+    }
+    
+    body {
+      font-family: var(--font-family);
+      line-height: 1.6;
+      color: var(--text-color);
+      margin: 0;
+      padding: var(--spacing-md);
+      background-color: var(--background-color);
+      font-size: var(--font-size-base);
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: var(--secondary-background);
+      padding: var(--spacing-lg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+    
+    h1 {
+      color: var(--main-color);
+      text-align: center;
+      margin-bottom: var(--spacing-lg);
+      font-weight: 600;
+    }
+    
+    h2 {
+      color: var(--main-color);
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 8px;
+      margin-top: var(--spacing-lg);
+      font-weight: 500;
+    }
+    
+    h3 {
+      color: var(--text-color);
+      margin-top: 25px;
+      font-weight: 500;
+    }
+    
+    .demo-section {
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+    
+    pre {
+      background-color: #f1f5f9;
+      padding: var(--spacing-sm);
+      border-left: 4px solid var(--main-color);
+      border-radius: 0 4px 4px 0;
+      overflow-x: auto;
+      margin: 15px 0;
+    }
+    
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      color: var(--accent-color);
+    }
+    
+    /* Demo Layout */
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+    
+    .example-card {
+      background: var(--secondary-background);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: var(--transition-default);
+    }
+    
+    .example-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 7px 15px rgba(0,0,0,0.1);
+    }
+    
+    .example-card-title {
+      font-weight: bold;
+      margin-bottom: var(--spacing-sm);
+      color: var(--main-color);
+      border-bottom: 1px solid #eee;
+      padding-bottom: 5px;
+    }
+    
+    .demo-area {
+      min-height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: var(--spacing-sm);
+      position: relative;
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-sm);
+    }
+    
+    /* Control Panel */
+    .control-panel {
+      margin-top: var(--spacing-md);
+      padding: var(--spacing-md);
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+    }
+    
+    .control-group {
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    
+    input[type="color"],
+    input[type="range"],
+    select {
+      width: 100%;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    button {
+      background-color: var(--main-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: var(--transition-default);
+    }
+    
+    button:hover {
+      background-color: #2980b9;
+    }
+    
+    /* Variable Demos */
+    .theme-demo {
+      --button-color: var(--main-color);
+      --button-text: white;
+      --button-padding: 10px 20px;
+      padding: var(--spacing-md);
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+    }
+    
+    .theme-button {
+      background-color: var(--button-color);
+      color: var(--button-text);
+      padding: var(--button-padding);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .responsive-container {
+      --columns: 1;
+      display: grid;
+      grid-template-columns: repeat(var(--columns), 1fr);
+      gap: var(--spacing-sm);
+      padding: var(--spacing-sm);
+      background-color: var(--background-color);
+    }
+    
+    .responsive-item {
+      padding: var(--spacing-sm);
+      background-color: var(--main-color);
+      color: white;
+      text-align: center;
+      border-radius: var(--border-radius);
+    }
+    
+    @media (min-width: 576px) {
+      .responsive-container {
+        --columns: 2;
+      }
+    }
+    
+    @media (min-width: 768px) {
+      .responsive-container {
+        --columns: 3;
+      }
+    }
+    
+    /* Color Theme Demos */
+    .theme-switcher {
+      display: flex;
+      gap: 10px;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .theme-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    
+    .light-theme {
+      background-color: #f5f7fa;
+      border: 2px solid #ddd;
+    }
+    
+    .dark-theme {
+      background-color: #2c3e50;
+      border: 2px solid #34495e;
+    }
+    
+    .blue-theme {
+      background-color: #3498db;
+      border: 2px solid #2980b9;
+    }
+    
+    .green-theme {
+      background-color: #2ecc71;
+      border: 2px solid #27ae60;
+    }
+    
+    /* Theme Demo */
+    .theme-demo-container {
+      padding: var(--spacing-md);
+      background-color: var(--theme-bg, #fff);
+      color: var(--theme-text, #333);
+      border-radius: var(--border-radius);
+      transition: var(--transition-default);
+    }
+    
+    .theme-demo-header {
+      padding: var(--spacing-sm) var(--spacing-md);
+      background-color: var(--theme-primary, #3498db);
+      color: white;
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      margin: -20px -20px 20px -20px;
+    }
+    
+    .theme-demo-button {
+      background-color: var(--theme-accent, #e74c3c);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    /* Animation Demo */
+    .animation-demo {
+      --animation-duration: 2s;
+      --animation-timing: ease-in-out;
+      width: 50px;
+      height: 50px;
+      background-color: var(--main-color);
+      border-radius: var(--border-radius);
+      animation: slide var(--animation-duration) var(--animation-timing) infinite alternate;
+    }
+    
+    @keyframes slide {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(200px);
+      }
+    }
+    
+    /* Media Query Demo for Dark Mode */
+    @media (prefers-color-scheme: dark) {
+      .dark-mode-aware {
+        --bg-color: #2c3e50;
+        --text-color: #ecf0f1;
+      }
+    }
+    
+    .dark-mode-aware {
+      --bg-color: #f8f9fa;
+      --text-color: #2c3e50;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      transition: var(--transition-default);
+    }
+    
+    /* Calculated Values Demo */
+    .calculated-demo {
+      --base-size: 16px;
+      --ratio: 1.2;
+      --padding-small: calc(var(--base-size) / 2);
+      --padding-medium: var(--base-size);
+      --padding-large: calc(var(--base-size) * 2);
+      --font-small: calc(var(--base-size) * 0.875);
+      --font-medium: var(--base-size);
+      --font-large: calc(var(--base-size) * var(--ratio));
+      --font-xlarge: calc(var(--base-size) * var(--ratio) * var(--ratio));
+    }
+    
+    .calculated-item {
+      padding: var(--padding-medium);
+      margin-bottom: var(--spacing-sm);
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+    }
+    
+    .calculated-small {
+      font-size: var(--font-small);
+      padding: var(--padding-small);
+    }
+    
+    .calculated-medium {
+      font-size: var(--font-medium);
+    }
+    
+    .calculated-large {
+      font-size: var(--font-large);
+      padding: var(--padding-large);
+    }
+    
+    .calculated-xlarge {
+      font-size: var(--font-xlarge);
+    }
+    
+    /* Fallback Demo */
+    .fallback-demo {
+      --custom-color: tomato; /* modern browsers */
+      color: #ff6347; /* fallback for browsers that don't support variables */
+      color: var(--custom-color);
+      padding: var(--spacing-md);
+      background-color: var(--background-color);
+      border-radius: var(--border-radius);
+    }
+    
+    /* Scope Demo */
+    .parent-scope {
+      --scope-color: blue;
+      padding: var(--spacing-md);
+      background-color: #e3f2fd;
+      border-radius: var(--border-radius);
+    }
+    
+    .child-scope {
+      --scope-color: green; /* Overrides the parent scope */
+      margin-top: var(--spacing-sm);
+      padding: var(--spacing-sm);
+      background-color: #e8f5e9;
+      border-radius: var(--border-radius);
+    }
+    
+    .scope-element {
+      color: var(--scope-color);
+      font-weight: bold;
+    }
+    
+    /* Dark Mode Toggle for Demo */
+    .dark-mode-toggle {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .toggle-button {
+      background-color: var(--main-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    /* Dark Mode Demo */
+    body.dark-mode {
+      --main-color: #4fc3f7;
+      --accent-color: #ff8a65;
+      --text-color: #ecf0f1;
+      --background-color: #2c3e50;
+      --secondary-background: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CSS Variables and Custom Properties Guide</h1>
+    
+    <p>CSS Variables (officially called Custom Properties) allow you to define reusable values that can be used throughout your CSS code. They provide powerful ways to create more maintainable, themeable, and dynamic styles.</p>
+    
+    <div class="dark-mode-toggle">
+      <button id="toggleDarkMode" class="toggle-button">Toggle Dark Mode</button>
+    </div>
+    
+    <h2>1. Introduction to CSS Variables</h2>
+    
+    <div class="demo-section">
+      <h3>What Are CSS Variables?</h3>
+      <p>CSS Variables are entities defined by developers that contain specific values to be reused throughout a document. They're set using custom property notation (e.g., <code>--main-color: blue;</code>) and are accessed using the <code>var()</code> function.</p>
+      
+      <h3>Benefits of Using CSS Variables</h3>
+      <ul>
+        <li><strong>DRY Principle:</strong> Don't Repeat Yourself - define values once and reuse them.</li>
+        <li><strong>Easy Updates:</strong> Change a value in one place to update it everywhere it's used.</li>
+        <li><strong>Semantic Names:</strong> Use meaningful names instead of cryptic values.</li>
+        <li><strong>Dynamic Styling:</strong> Update variables with JavaScript for real-time style changes.</li>
+        <li><strong>Responsive Design:</strong> Modify variables within media queries for different screen sizes.</li>
+        <li><strong>Theming:</strong> Easily implement dark/light modes or different color schemes.</li>
+        <li><strong>Calculations:</strong> Perform mathematical operations with <code>calc()</code> on variables.</li>
+      </ul>
+    </div>
+    
+    <h2>2. Basic Syntax and Usage</h2>
+    
+    <div class="demo-section">
+      <h3>Declaring CSS Variables</h3>
+      <pre><code>:root {
+  --main-color: #3498db;
+  --accent-color: #e74c3c;
+  --font-size-base: 16px;
+  --spacing: 20px;
+}</code></pre>
+      
+      <p>CSS variables are declared with a double-dash prefix (<code>--</code>) followed by a name. The <code>:root</code> selector is commonly used for global variables, but they can be defined on any element.</p>
+      
+      <h3>Using CSS Variables</h3>
+      <pre><code>.button {
+  background-color: var(--main-color);
+  color: white;
+  padding: var(--spacing);
+  font-size: var(--font-size-base);
+}</code></pre>
+      
+      <p>The <code>var()</code> function accesses the value of a custom property. If the custom property is not defined, the browser will use the default value (if provided) or ignore the property.</p>
+      
+      <h3>Providing Fallback Values</h3>
+      <pre><code>/* If --accent-color is not defined, red will be used */
+.button-accent {
+  background-color: var(--accent-color, red);
+}</code></pre>
+      
+      <div class="examples-grid">
+        <div class="example-card">
+          <div class="example-card-title">Basic Button with Variables</div>
+          <div class="demo-area">
+            <button class="theme-button">Click Me</button>
+          </div>
+          <pre><code>.theme-button {
+  background-color: var(--button-color);
+  color: var(--button-text);
+  padding: var(--button-padding);
+  border: none;
+  border-radius: 4px;
+}</code></pre>
+        </div>
+      </div>
+    </div>
+    
+    <h2>3. Scope and Inheritance</h2>
+    
+    <div class="demo-section">
+      <h3>Global Scope</h3>
+      <p>Variables defined in the <code>:root</code> selector are globally available to all elements in the document:</p>
+      <pre><code>:root {
+  --global-color: blue;
+}
+
+/* Available to any element */
+.element {
+  color: var(--global-color);
+}</code></pre>
+      
+      <h3>Local Scope</h3>
+      <p>Variables can also be defined for specific elements, limiting their scope:</p>
+      <pre><code>.card {
+  --card-color: green; /* Local to .card and its children */
+  background-color: var(--card-color);
+}
+
+.card .title {
+  color: var(--card-color); /* Can access parent's variable */
+}</code></pre>
+      
+      <h3>Inheritance and Cascading</h3>
+      <p>Custom properties follow the normal rules of cascading and inheritance in CSS:</p>
+      <div class="parent-scope">
+        <p>Parent element with <span class="scope-element">blue</span> variable</p>
+        <div class="child-scope">
+          <p>Child element with <span class="scope-element">green</span> variable (overrides parent)</p>
+        </div>
+      </div>
+      <pre><code>.parent-scope {
+  --scope-color: blue;
+}
+
+.child-scope {
+  --scope-color: green; /* Overrides the parent scope */
+}
+
+.scope-element {
+  color: var(--scope-color);
+}</code></pre>
+    </div>
+    
+    <h2>4. Dynamic Variables with JavaScript</h2>
+    
+    <div class="demo-section">
+      <h3>Reading CSS Variables with JavaScript</h3>
+      <pre><code>// Get a variable from root
+const rootStyles = getComputedStyle(document.documentElement);
+const mainColor = rootStyles.getPropertyValue('--main-color');
+
+console.log(mainColor); // " #3498db"</code></pre>
+      
+      <h3>Setting CSS Variables with JavaScript</h3>
+      <pre><code>// Set a variable on root
+document.documentElement.style.setProperty('--main-color', '#9b59b6');
+
+// Set a variable on a specific element
+const element = document.querySelector('.my-element');
+element.style.setProperty('--element-color', 'green');</code></pre>
+      
+      <h3>Interactive Example - Color Picker</h3>
+      <div class="control-panel">
+        <div class="control-group">
+          <label for="colorPicker">Change Main Color:</label>
+          <input type="color" id="colorPicker" value="#3498db">
+        </div>
+        <div class="control-group">
+          <label for="spacingSlider">Adjust Spacing:</label>
+          <input type="range" id="spacingSlider" min="5" max="40" value="20">
+          <span id="spacingValue">20px</span>
+        </div>
+        <div class="theme-demo">
+          <button class="theme-button">Themed Button</button>
+        </div>
+      </div>
+    </div>
+    
+    <h2>5. Practical Use Cases</h2>
+    
+    <div class="demo-section">
+      <h3>Theming and Dark Mode</h3>
+      <div class="theme-switcher">
+        <div class="theme-option light-theme" data-theme="light"></div>
+        <div class="theme-option dark-theme" data-theme="dark"></div>
+        <div class="theme-option blue-theme" data-theme="blue"></div>
+        <div class="theme-option green-theme" data-theme="green"></div>
+      </div>
+      <div class="theme-demo-container">
+        <div class="theme-demo-header">
+          <h3>Theme Example</h3>
+        </div>
+        <p>This is a themed content area that changes based on the selected theme.</p>
+        <button class="theme-demo-button">Themed Button</button>
+      </div>
+      <pre><code>/* Light Theme (default) */
+:root {
+  --theme-bg: #ffffff;
+  --theme-text: #333333;
+  --theme-primary: #3498db;
+  --theme-accent: #e74c3c;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --theme-bg: #2c3e50;
+  --theme-text: #ecf0f1;
+  --theme-primary: #3498db;
+  --theme-accent: #e74c3c;
+}
+
+/* Usage */
+.themed-element {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}</code></pre>
+      
+      <h3>Responsive Design</h3>
+      <p>Change variables based on screen size:</p>
+      <div class="responsive-container">
+        <div class="responsive-item">Item 1</div>
+        <div class="responsive-item">Item 2</div>
+        <div class="responsive-item">Item 3</div>
+        <div class="responsive-item">Item 4</div>
+        <div class="responsive-item">Item 5</div>
+        <div class="responsive-item">Item 6</div>
+      </div>
+      <pre><code>.responsive-container {
+  --columns: 1; /* Default for mobile */
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+}
+
+@media (min-width: 576px) {
+  .responsive-container {
+    --columns: 2; /* Tablet */
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-container {
+    --columns: 3; /* Desktop */
+  }
+}</code></pre>
+      
+      <h3>CSS Animation Control</h3>
+      <div class="demo-area">
+        <div class="animation-demo"></div>
+      </div>
+      <div class="control-group">
+        <label for="animationSpeed">Animation Speed:</label>
+        <input type="range" id="animationSpeed" min="0.5" max="5" step="0.5" value="2">
+        <span id="speedValue">2s</span>
+      </div>
+      <pre><code>.animation-demo {
+  --animation-duration: 2s;
+  --animation-timing: ease-in-out;
+  animation: slide var(--animation-duration) var(--animation-timing) infinite alternate;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(200px); }
+}</code></pre>
+      
+      <h3>System Preference Detection</h3>
+      <div class="dark-mode-aware">
+        <p>This element adapts to your system's color scheme preference (if your browser supports it).</p>
+      </div>
+      <pre><code>.dark-mode-aware {
+  --bg-color: #f8f9fa; /* Light mode default */
+  --text-color: #2c3e50;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark-mode-aware {
+    --bg-color: #2c3e50; /* Dark mode override */
+    --text-color: #ecf0f1;
+  }
+}</code></pre>
+    </div>
+    
+    <h2>6. Advanced Techniques</h2>
+    
+    <div class="demo-section">
+      <h3>Calculated Values</h3>
+      <div class="calculated-demo">
+        <div class="calculated-item calculated-small">Small Text (0.875×)</div>
+        <div class="calculated-item calculated-medium">Medium Text (1×)</div>
+        <div class="calculated-item calculated-large">Large Text (1.2×)</div>
+        <div class="calculated-item calculated-xlarge">Extra Large Text (1.44×)</div>
+      </div>
+      <pre><code>.calculated-demo {
+  --base-size: 16px;
+  --ratio: 1.2;
+  --font-small: calc(var(--base-size) * 0.875);
+  --font-medium: var(--base-size);
+  --font-large: calc(var(--base-size) * var(--ratio));
+  --font-xlarge: calc(var(--base-size) * var(--ratio) * var(--ratio));
+}</code></pre>
+      
+      <h3>Fallback Chains</h3>
+      <div class="fallback-demo">
+        This text is tomato color in modern browsers.
+      </div>
+      <pre><code>.fallback-demo {
+  /* Fallback first */
+  color: #ff6347; 
+  
+  /* Then the variable */
+  color: var(--custom-color, tomato);
+  
+  /* Complex fallback chain */
+  color: var(--primary-color, var(--backup-color, var(--default-color, #333)));
+}</code></pre>
+      
+      <h3>Combining with CSS Functions</h3>
+      <pre><code>:root {
+  --hue: 200;
+  --saturation: 70%;
+  --lightness: 50%;
+}
+
+.element {
+  /* HSL based on variables */
+  background-color: hsl(var(--hue), var(--saturation), var(--lightness));
+  
+  /* Lighter variant */
+  color: hsl(var(--hue), var(--saturation), calc(var(--lightness) + 30%));
+}</code></pre>
+    </div>
+    
+    <h2>7. Best Practices and Organization</h2>
+    
+    <div class="demo-section">
+      <h3>Naming Conventions</h3>
+      <pre><code>/* Component based */
+.alert {
+  --alert-bg: #f8d7da;
+  --alert-text: #721c24;
+  --alert-border: #f5c6cb;
+}
+
+/* Semantic naming */
+:root {
+  --color-primary: #3498db;
+  --color-secondary: #2ecc71;
+  --color-danger: #e74c3c;
+  --color-warning: #f39c12;
+  
+  /* Instead of: */
+  --blue: #3498db;    /* Avoid color names */
+  --green: #2ecc71;   /* that might change */
+}
+
+/* Structured naming with BEM-like syntax */
+:root {
+  --button-primary-bg: #3498db;
+  --button-primary-text: white;
+  --button-danger-bg: #e74c3c;
+  --button-danger-text: white;
+}</code></pre>
+      
+      <h3>Organizing Variables</h3>
+      <pre><code>:root {
+  /* Colors */
+  --color-primary: #3498db;
+  --color-secondary: #2ecc71;
+  --color-text: #2c3e50;
+  --color-background: #f5f7fa;
+  
+  /* Typography */
+  --font-family-base: 'Segoe UI', sans-serif;
+  --font-size-base: 16px;
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  
+  /* Spacing */
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  
+  /* Effects */
+  --border-radius: 4px;
+  --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  --transition: all 0.3s ease;
+}</code></pre>
+      
+      <h3>Commenting and Documentation</h3>
+      <pre><code>:root {
+  /* Primary Colors
+   * Use these for main UI elements
+   * ------------------------------- */
+  --color-primary: #3498db;   /* Blue: Primary actions, links */
+  --color-secondary: #2ecc71; /* Green: Success, confirmation */
+  --color-accent: #e74c3c;    /* Red: Errors, destructive actions */
+  
+  /* Neutral Colors
+   * Use for text, backgrounds, borders
+   * ---------------------------------- */
+  --color-text: #2c3e50;      /* Main text color */
+  --color-text-light: #7f8c8d; /* Secondary text, captions */
+  --color-border: #ecf0f1;    /* Borders, dividers */
+}</code></pre>
+    </div>
+    
+    <h2>8. Browser Support and Polyfills</h2>
+    
+    <div class="demo-section">
+      <h3>Browser Support</h3>
+      <p>CSS Variables are well-supported in all modern browsers (Chrome, Firefox, Safari, Edge). Internet Explorer 11 does not support CSS Variables.</p>
+      
+      <h3>Feature Detection</h3>
+      <pre><code>@supports (--custom-property: value) {
+  /* Code that uses CSS variables */
+  :root {
+    --color-primary: blue;
+  }
+}
+
+@supports not (--custom-property: value) {
+  /* Fallback code */
+  .button {
+    background-color: blue; /* Hardcoded value */
+  }
+}</code></pre>
+      
+      <h3>JavaScript Polyfill</h3>
+      <p>For older browsers, you can use a polyfill like <a href="https://github.com/jhildenbiddle/css-vars-ponyfill" target="_blank">css-vars-ponyfill</a>:</p>
+      <pre><code>// Include the polyfill
+&lt;script src="css-vars-ponyfill.min.js"&gt;&lt;/script&gt;
+
+// Initialize
+&lt;script&gt;
+  cssVars({
+    // Options
+    onlyLegacy: true, // Only apply to browsers that don't support CSS variables
+    variables: {
+      // Define variables that don't exist in CSS
+      '--color-primary': '#3498db'
+    }
+  });
+&lt;/script&gt;</code></pre>
+    </div>
+    
+    <h2>9. Performance Considerations</h2>
+    
+    <div class="demo-section">
+      <h3>Performance Impact</h3>
+      <ul>
+        <li>CSS Variables have minimal performance impact in modern browsers.</li>
+        <li>Repeatedly changing variables with JavaScript can trigger repaints/reflows.</li>
+        <li>Deep nesting of variable references can increase computation time.</li>
+      </ul>
+      
+      <h3>Optimization Tips</h3>
+      <ul>
+        <li><strong>Limit Recalculations:</strong> Batch JavaScript updates to variables when possible.</li>
+        <li><strong>Avoid Deep Dependencies:</strong> Don't create long chains of variables that depend on other variables.</li>
+        <li><strong>Be Strategic:</strong> Use variables for values that change or are reused, not for everything.</li>
+        <li><strong>Consider the Scope:</strong> Define variables at the most appropriate level rather than always using <code>:root</code>.</li>
+      </ul>
+    </div>
+    
+    <h2>10. Real-world Examples</h2>
+    
+    <div class="demo-section">
+      <h3>Component-Based Design System</h3>
+      <pre><code>/* Base Variables */
+:root {
+  --color-primary: #3498db;
+  --color-text: #2c3e50;
+  --spacing-unit: 8px;
+  --border-radius: 4px;
+}
+
+/* Component Variables */
+.card {
+  --card-padding: calc(var(--spacing-unit) * 3);
+  --card-bg: white;
+  --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  
+  padding: var(--card-padding);
+  background-color: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--border-radius);
+}
+
+.button {
+  --button-bg: var(--color-primary);
+  --button-color: white;
+  --button-padding-y: calc(var(--spacing-unit) * 1.5);
+  --button-padding-x: calc(var(--spacing-unit) * 3);
+  
+  background-color: var(--button-bg);
+  color: var(--button-color);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border-radius: var(--border-radius);
+}</code></pre>
+      
+      <h3>Dynamic Theme Implementation</h3>
+      <pre><code>/* Theme Definitions */
+:root {
+  /* Default (Light) Theme */
+  --theme-bg: #ffffff;
+  --theme-surface: #f5f7fa;
+  --theme-text: #2c3e50;
+  --theme-primary: #3498db;
+  --theme-secondary: #2ecc71;
+  --theme-error: #e74c3c;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  --theme-bg: #1a1a2e;
+  --theme-surface: #16213e;
+  --theme-text: #e0e0e0;
+  --theme-primary: #4fc3f7;
+  --theme-secondary: #67d88e;
+  --theme-error: #ff7675;
+}
+
+/* High Contrast Theme */
+body.high-contrast-theme {
+  --theme-bg: #000000;
+  --theme-surface: #121212;
+  --theme-text: #ffffff;
+  --theme-primary: #fcff4d;
+  --theme-secondary: #61ff61;
+  --theme-error: #ff5252;
+}</code></pre>
+      
+      <h3>Responsive Typography System</h3>
+      <pre><code>:root {
+  --font-size-base: 16px;
+  --line-height: 1.5;
+  --scale-ratio: 1.25;
+  
+  /* Type Scale */
+  --font-size-sm: calc(var(--font-size-base) / var(--scale-ratio));
+  --font-size-md: var(--font-size-base);
+  --font-size-lg: calc(var(--font-size-base) * var(--scale-ratio));
+  --font-size-xl: calc(var(--font-size-base) * var(--scale-ratio) * var(--scale-ratio));
+  --font-size-xxl: calc(var(--font-size-base) * var(--scale-ratio) * var(--scale-ratio) * var(--scale-ratio));
+}
+
+/* Adjust base size at different breakpoints */
+@media (min-width: 768px) {
+  :root {
+    --font-size-base: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --font-size-base: 20px;
+  }
+}</code></pre>
+    </div>
+  </div>
+  
+  <script>
+    // Dark Mode Toggle
+    document.getElementById('toggleDarkMode').addEventListener('click', function() {
+      document.body.classList.toggle('dark-mode');
+    });
+    
+    // Color Picker
+    document.getElementById('colorPicker').addEventListener('input', function(e) {
+      document.documentElement.style.setProperty('--main-color', e.target.value);
+    });
+    
+    // Spacing Slider
+    document.getElementById('spacingSlider').addEventListener('input', function(e) {
+      const value = e.target.value + 'px';
+      document.documentElement.style.setProperty('--spacing-md', value);
+      document.getElementById('spacingValue').textContent = value;
+    });
+    
+    // Animation Speed
+    document.getElementById('animationSpeed').addEventListener('input', function(e) {
+      const value = e.target.value + 's';
+      document.documentElement.style.setProperty('--animation-duration', value);
+      document.getElementById('speedValue').textContent = value;
+    });
+    
+    // Theme Switcher
+    document.querySelectorAll('.theme-option').forEach(option => {
+      option.addEventListener('click', function() {
+        const theme = this.getAttribute('data-theme');
+        
+        // Reset all theme variables
+        document.documentElement.style.setProperty('--theme-bg', '');
+        document.documentElement.style.setProperty('--theme-text', '');
+        document.documentElement.style.setProperty('--theme-primary', '');
+        document.documentElement.style.setProperty('--theme-accent', '');
+        
+        // Set new theme variables based on selected theme
+        switch(theme) {
+          case 'light':
+            document.documentElement.style.setProperty('--theme-bg', '#ffffff');
+            document.documentElement.style.setProperty('--theme-text', '#333333');
+            document.documentElement.style.setProperty('--theme-primary', '#3498db');
+            document.documentElement.style.setProperty('--theme-accent', '#e74c3c');
+            break;
+          case 'dark':
+            document.documentElement.style.setProperty('--theme-bg', '#2c3e50');
+            document.documentElement.style.setProperty('--theme-text', '#ecf0f1');
+            document.documentElement.style.setProperty('--theme-primary', '#4fc3f7');
+            document.documentElement.style.setProperty('--theme-accent', '#ff8a65');
+            break;
+          case 'blue':
+            document.documentElement.style.setProperty('--theme-bg', '#e3f2fd');
+            document.documentElement.style.setProperty('--theme-text', '#0d47a1');
+            document.documentElement.style.setProperty('--theme-primary', '#1976d2');
+            document.documentElement.style.setProperty('--theme-accent', '#ffa000');
+            break;
+          case 'green':
+            document.documentElement.style.setProperty('--theme-bg', '#e8f5e9');
+            document.documentElement.style.setProperty('--theme-text', '#1b5e20');
+            document.documentElement.style.setProperty('--theme-primary', '#2e7d32');
+            document.documentElement.style.setProperty('--theme-accent', '#e64a19');
+            break;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
